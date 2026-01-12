@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 extension BuildContextExtensions on BuildContext {
   NavigatorState get nav => Navigator.of(this);
@@ -88,27 +89,25 @@ extension ScaffoldMessengerExtension on BuildContext {
 }
 
 extension SimpleDialogExtension on BuildContext {
-  void simpleDialog({
-    required String msg,
-    required String lottie,
-    bool dismissible = true,
-  }) {
+  void simpleDialog({required String msg, required String lottie}) {
     showAdaptiveDialog(
       context: this,
-      barrierDismissible: dismissible,
+      barrierDismissible: true,
+      
       builder: (_) {
         return Dialog(
+          // insetPadding: const EdgeInsets.all(24),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // LottieBuilder.asset(
-                //   lottie,
-                //   width: 100,
-                //   height: 100,
-                //   reverse: true,
-                // ),
+                LottieBuilder.asset(
+                  lottie,
+                  width: 100,
+                  height: 100,
+                  reverse: true,
+                ),
                 Flexible(child: Text(msg)),
               ],
             ),

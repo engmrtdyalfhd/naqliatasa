@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:naqliatsa/core/helper/extension.dart';
 
+import '../../../core/helper/constant.dart';
 import '../../../core/helper/utils.dart';
 
 class ProfileView extends StatelessWidget {
@@ -36,7 +39,7 @@ class ProfileView extends StatelessWidget {
                       text: "Phone  ",
                       children: [
                         TextSpan(
-                          text: "+966 123 456 78",
+                          text: FirebaseAuth.instance.currentUser?.phoneNumber,
                           style: TextStyle(fontSize: 14, fontWeight: .normal),
                         ),
                       ],
@@ -84,7 +87,15 @@ class ProfileView extends StatelessWidget {
               ),
               const SizedBox(height: 2),
               ListTile(
-                onTap: () {},
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  if (context.mounted) {
+                    context.pushNamedAndRemoveUntil(
+                      RoutePath.authGate,
+                      (_) => false,
+                    );
+                  }
+                },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),

@@ -1,7 +1,9 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/colory.dart';
+import '../../manager/auth_cubit.dart';
 
 class OtpInput extends StatefulWidget {
   const OtpInput({super.key});
@@ -10,8 +12,8 @@ class OtpInput extends StatefulWidget {
   State<OtpInput> createState() => _OtpInputState();
 
   static final _defaultPinTheme = PinTheme(
-    width: 64,
-    height: 64,
+    width: 48,
+    height: 48,
     textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
     decoration: BoxDecoration(
       color: Colory.lightBg,
@@ -49,7 +51,10 @@ class _OtpInputState extends State<OtpInput> {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Pinput(
-        length: 4,
+        onChanged: (val) {
+          context.read<AuthCubit>().smsCode = val;
+        },
+        length: 6,
         autofocus: true,
         controller: _controller,
         // validator: (val) {

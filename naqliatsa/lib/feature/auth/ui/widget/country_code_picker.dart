@@ -1,34 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/theme/colory.dart';
 
-class CountryCodePicker extends StatefulWidget {
-  const CountryCodePicker({super.key});
+class CountryCodePicker extends StatelessWidget {
+  final String selectedCode;
+  final void Function()? onTap;
 
-  @override
-  State<CountryCodePicker> createState() => _CountryCodePickerState();
-}
-
-class _CountryCodePickerState extends State<CountryCodePicker> {
-  String selectedCode = '+966';
+  const CountryCodePicker({
+    super.key,
+    required this.onTap,
+    required this.selectedCode,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async {
-        final code = await showModalBottomSheet<String>(
-          context: context,
-          isScrollControlled: true,
-          builder: (_) => const CountryCodeBottomSheet(),
-        );
-
-        if (code != null) {
-          setState(() {
-            selectedCode = code;
-          });
-        }
-      },
+      onTap: onTap,
       borderRadius: BorderRadius.circular(16),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),

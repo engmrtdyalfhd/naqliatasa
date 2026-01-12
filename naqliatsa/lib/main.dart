@@ -1,5 +1,4 @@
 import 'core/helper/utils.dart';
-import 'core/helper/constant.dart';
 import 'core/helper/app_route.dart';
 import 'core/theme/light_theme.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ void main() async {
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')],
       path: 'assets/langs',
-      startLocale: Locale('ar'),
+      startLocale: Locale('en'),
       fallbackLocale: Locale('en'),
       child: NaqliatKSA(),
     ),
@@ -27,10 +26,7 @@ class NaqliatKSA extends StatelessWidget {
       title: 'Naqliat KSA',
       theme: lightTheme(),
       debugShowCheckedModeBanner: false,
-      // ? Routes
-      initialRoute: RoutePath.onboarding,
       onGenerateRoute: AppRoutes.generateRoute,
-      // ? Localization settings
       locale: context.locale,
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,

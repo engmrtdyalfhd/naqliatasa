@@ -39,18 +39,24 @@ class OnboardingView extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Row(
-                spacing: 16,
+                spacing: 9,
                 children: [
-                  LangChoice(
-                    flag: "🇺🇸",
-                    onTap: () async {
-                      // await context.setLocale(Locale("en"));
-                    },
-                  ),
                   LangChoice(
                     flag: "🇸🇦",
                     onTap: () async {
                       // await context.setLocale(Locale("ar"));
+                    },
+                  ),
+                  LangChoice(
+                    flag: "🇵🇰",
+                    onTap: () async {
+                      // await context.setLocale(Locale("ar"));
+                    },
+                  ),
+                  LangChoice(
+                    flag: "🇺🇸",
+                    onTap: () async {
+                      // await context.setLocale(Locale("en"));
                     },
                   ),
                 ],
@@ -61,7 +67,7 @@ class OnboardingView extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavWrapper(
         child: FilledButton(
-          onPressed: () => context.pushNamed(RoutePath.auth),
+          onPressed: () => context.pushNamed(RoutePath.login),
           child: Text("continue".tr()),
         ),
       ),

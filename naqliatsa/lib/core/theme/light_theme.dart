@@ -83,14 +83,14 @@ ThemeData lightTheme() {
     dialogTheme: DialogThemeData(
       clipBehavior: Clip.hardEdge,
       alignment: Alignment.center,
-      insetPadding: EdgeInsets.zero,
+      // insetPadding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       titleTextStyle: TextStyle(
         fontSize: 16,
         color: Colors.black,
         fontWeight: FontWeight.w500,
       ),
-      actionsPadding: EdgeInsets.fromLTRB(16, 0, 16, 6),
+      actionsPadding: EdgeInsets.fromLTRB(16, 0, 16, 12),
       contentTextStyle: TextStyle(fontSize: 14, color: Colors.black),
     ),
     // ! _____ FAB _____ ! //
@@ -110,6 +110,11 @@ ThemeData lightTheme() {
     bottomSheetTheme: BottomSheetThemeData(
       showDragHandle: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    ),
+    // !
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      strokeWidth: 2,
+      color: Colors.white,
     ),
   );
 }

@@ -71,6 +71,7 @@ class Input extends StatelessWidget {
         isDense: false,
         prefixIcon: prefix != null ? Icon(prefix) : null,
         suffixIcon: suffix,
+        errorMaxLines: 3,
       ),
     );
   }
