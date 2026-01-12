@@ -68,3 +68,87 @@ extension NavigationExtensions on BuildContext {
     Navigator.pop<T>(this, result);
   }
 }
+
+extension ScaffoldMessengerExtension on BuildContext {
+  void showMsg(
+    String msg, {
+    Color? backgroundColor,
+    SnackBarAction? action,
+    Duration duration = const Duration(seconds: 3),
+  }) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        action: action,
+        content: Text(msg),
+        duration: duration,
+        backgroundColor: backgroundColor,
+      ),
+    );
+  }
+}
+
+extension SimpleDialogExtension on BuildContext {
+  void simpleDialog({
+    required String msg,
+    required String lottie,
+    bool dismissible = true,
+  }) {
+    showAdaptiveDialog(
+      context: this,
+      barrierDismissible: dismissible,
+      builder: (_) {
+        return Dialog(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // LottieBuilder.asset(
+                //   lottie,
+                //   width: 100,
+                //   height: 100,
+                //   reverse: true,
+                // ),
+                Flexible(child: Text(msg)),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+Future<void> showConfirmationAlert({
+  required BuildContext context,
+  String title = "Alert",
+  String content = "Are you sure?",
+  String confirmText = "Continue",
+  String cancelText = "Cancel",
+  required VoidCallback onConfirm,
+}) async {
+  final bool? shouldProceed = await showAdaptiveDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (_) {
+      return AlertDialog.adaptive(
+        title: Text(title),
+        content: Text(content),
+        actions: [
+          TextButton(
+            onPressed: () => context.pop(false),
+            child: Text(
+              cancelText,
+              style: TextStyle(color: Colors.red.shade300),
+            ),
+          ),
+          TextButton(
+            onPressed: () => context.pop(true),
+            child: Text(confirmText),
+          ),
+        ],
+      );
+    },
+  );
+  if (shouldProceed == true) onConfirm();
+}

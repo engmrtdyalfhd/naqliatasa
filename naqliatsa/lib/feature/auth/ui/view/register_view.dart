@@ -17,7 +17,7 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController phoneController;
-  AutovalidateMode _autovalidate = AutovalidateMode.disabled;
+  // AutovalidateMode _autovalidate = AutovalidateMode.disabled;
 
   @override
   void initState() {
@@ -76,7 +76,7 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
                         Form(
                           key: _formKey,
-                          autovalidateMode: _autovalidate,
+                          // autovalidateMode: _autovalidate,
                           child: Input(
                             validator: _validatePhone,
                             hint: 'phone_number'.tr(),
@@ -96,13 +96,14 @@ class _RegisterViewState extends State<RegisterView> {
       bottomNavigationBar: BottomNavWrapper(
         child: FilledButton(
           onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              context.pushNamed(RoutePath.verify_phone);
-            } else {
-              setState(() {
-                _autovalidate = AutovalidateMode.always;
-              });
-            }
+            context.pushNamed(RoutePath.verify_phone);
+            // if (_formKey.currentState!.validate()) {
+            //   context.pushNamed(RoutePath.verify_phone);
+            // } else {
+            //   setState(() {
+            //     _autovalidate = AutovalidateMode.always;
+            //   });
+            // }
           },
           child: Text("continue".tr()),
         ),

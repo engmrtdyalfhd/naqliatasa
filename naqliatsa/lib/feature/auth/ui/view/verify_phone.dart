@@ -20,7 +20,7 @@ class VerifyPhone extends StatelessWidget {
           crossAxisAlignment: .stretch,
           children: [
             const Text(
-              "Enter OTP Verification code",
+              "Enter OTP verification code",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 3),

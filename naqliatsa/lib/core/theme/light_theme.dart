@@ -11,6 +11,7 @@ ThemeData lightTheme() {
       seedColor: Colors.lightBlue,
     ),
     appBarTheme: const AppBarTheme(
+      titleSpacing: 16,
       backgroundColor: Colors.white,
       titleTextStyle: TextStyle(
         fontSize: 20,
@@ -42,28 +43,68 @@ ThemeData lightTheme() {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     ),
-    // ! _____ Main Button _____ ! //
+    // ! _____ Secondary Button _____ ! //
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        textStyle: TextStyle(fontSize: 13, fontWeight: .bold),
+        textStyle: TextStyle(fontSize: 12, fontWeight: .bold),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+    ),
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+          side: BorderSide(color: Colors.lightBlue.shade50),
+        ),
       ),
     ),
     // ! _____ ListTile _____ ! //
     listTileTheme: ListTileThemeData(
       dense: false,
-      tileColor: Colory.lightBg,
+      // tileColor: Colory.lightBg,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(color: Colors.lightBlue.shade100),
       ),
       titleTextStyle: const TextStyle(
-        fontSize: 13,
-        fontWeight: FontWeight.w500,
+        // fontSize: 13,
+        fontWeight: FontWeight.w600,
       ),
       textColor: Colors.black,
       iconColor: Colors.grey.shade600,
+      subtitleTextStyle: TextStyle(
+        inherit: false,
+        fontSize: 12,
+        color: Colors.grey.shade600,
+      ),
       // subtitleTextStyle: AppText.regular14(),
+    ),
+    // ! _____ Dialog _____ ! //
+    dialogTheme: DialogThemeData(
+      clipBehavior: Clip.hardEdge,
+      alignment: Alignment.center,
+      insetPadding: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      titleTextStyle: TextStyle(
+        fontSize: 16,
+        color: Colors.black,
+        fontWeight: FontWeight.w500,
+      ),
+      actionsPadding: EdgeInsets.fromLTRB(16, 0, 16, 6),
+      contentTextStyle: TextStyle(fontSize: 14, color: Colors.black),
+    ),
+    // ! _____ FAB _____ ! //
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      elevation: 3,
+      shape: StadiumBorder(),
+      extendedTextStyle: TextStyle(
+        inherit: false,
+        fontSize: 13,
+        fontWeight: .w700,
+      ),
+      extendedPadding: EdgeInsets.all(16),
+      // backgroundColor: Colors.white,
+      // foregroundColor: Colors.white,
     ),
     // ! _____ Bottom Sheet _____ ! //
     bottomSheetTheme: BottomSheetThemeData(
