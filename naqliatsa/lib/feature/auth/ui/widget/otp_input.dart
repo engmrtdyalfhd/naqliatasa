@@ -22,7 +22,7 @@ class OtpInput extends StatefulWidget {
   );
 
   static final _focusedPinTheme = _defaultPinTheme.copyDecorationWith(
-    border: Border.all(color: Colors.lightBlue.shade100),
+    border: Border.all(color: Colors.blue.shade100),
   );
 
   static final _submittedPinTheme = _defaultPinTheme.copyDecorationWith(

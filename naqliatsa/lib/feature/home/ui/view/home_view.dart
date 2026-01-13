@@ -20,7 +20,7 @@ class HomeView extends StatelessWidget {
               style: IconButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50),
-                  side: BorderSide(color: Colors.lightBlue.shade100),
+                  side: BorderSide(color: Colors.blue.shade100),
                 ),
               ),
               icon: Icon(Iconsax.user),

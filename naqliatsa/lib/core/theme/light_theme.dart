@@ -8,7 +8,7 @@ ThemeData lightTheme() {
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.light,
-      seedColor: Colors.lightBlue,
+      seedColor: Colors.blue,
     ),
     appBarTheme: const AppBarTheme(
       titleSpacing: 16,
@@ -46,7 +46,7 @@ ThemeData lightTheme() {
     // ! _____ Secondary Button _____ ! //
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        textStyle: TextStyle(fontSize: 12, fontWeight: .bold),
+        textStyle: TextStyle(fontSize: 13, fontWeight: .bold),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     ),
@@ -54,7 +54,20 @@ ThemeData lightTheme() {
       style: IconButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50),
-          side: BorderSide(color: Colors.lightBlue.shade50),
+          side: BorderSide(color: Colors.blue.shade50),
+        ),
+      ),
+    ),
+    // ! _____ Radio Button (Collection View) _____ ! //
+    menuButtonTheme: MenuButtonThemeData(
+      style: ButtonStyle(
+        // backgroundColor: WidgetStatePropertyAll(Colory.lightBg),
+        minimumSize: WidgetStatePropertyAll(Size.fromHeight(64)),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: BorderSide(color: Colors.blue.shade100),
+          ),
         ),
       ),
     ),
@@ -64,7 +77,7 @@ ThemeData lightTheme() {
       // tileColor: Colory.lightBg,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: Colors.lightBlue.shade100),
+        side: BorderSide(color: Colors.blue.shade100),
       ),
       titleTextStyle: const TextStyle(
         // fontSize: 13,
@@ -111,7 +124,7 @@ ThemeData lightTheme() {
       showDragHandle: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
-    // !
+    // ! _____ Progress Indicator _____ ! //
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       strokeWidth: 2,
       color: Colors.white,

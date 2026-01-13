@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../core/helper/constant.dart';
+import '../data/user_model.dart';
 
 part 'auth_state.dart';
 
@@ -118,13 +119,15 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> saveUser() async {
     try {
       if (_auth.currentUser == null) return;
+      final UserModel user = UserModel(
+        phone: _auth.currentUser!.phoneNumber!,
+        lastLogin: DateTime.now(),
+        collectionData: null,
+      );
       await _firestore
           .collection(DataString.usersCollection)
           .doc(_auth.currentUser!.uid)
-          .set({
-            'phone': _auth.currentUser!.phoneNumber,
-            'last_login': FieldValue.serverTimestamp(),
-          }, SetOptions(merge: true));
+          .set(user.toJson(), SetOptions(merge: true));
     } catch (e) {
       emit(AuthFailure("Oops! Couldn't save a user."));
     }
@@ -138,9 +141,8 @@ class AuthCubit extends Cubit<AuthState> {
           .get();
       // check if user exists and has document
       if (doc.exists || doc.data() == null) return false;
-      final data = doc.data() as Map<String, dynamic>;
-      print(doc.exists);
-      return data.containsKey(DataString.collectionAtt);
+      final user = UserModel.fromJson(doc.data() as Map<String, dynamic>);
+      return user.collectionData == null;
     } catch (e) {
       emit(AuthFailure("Oops! Couldn't get the data."));
       return false;

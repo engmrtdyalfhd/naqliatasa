@@ -22,7 +22,7 @@ class CountryCodePicker extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         decoration: BoxDecoration(
           color: Colory.lightBg,
-          border: Border.all(color: Colors.lightBlue.shade50),
+          border: Border.all(color: Colors.blue.shade50),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(

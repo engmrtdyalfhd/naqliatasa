@@ -17,7 +17,7 @@ class LangChoice extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(32),
-            border: Border.all(color: Colors.lightBlue.shade50),
+            border: Border.all(color: Colors.blue.shade50),
           ),
           child: Text(flag, style: TextStyle(fontSize: 48)),
         ),

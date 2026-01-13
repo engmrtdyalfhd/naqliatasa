@@ -13,6 +13,10 @@ final class RoutePath {
 }
 
 final class DataString {
+  // Naqliat Users
   static const String usersCollection = "naqliat_users";
-  static const String collectionAtt = "user_data";
+  static const String collectionAtt = "collection_data";
+  // Dashboard
+  static const String dashboardCollection = "dashboard";
+  static const String collectionDoc = "collection_data";
 }

@@ -1,3 +1,4 @@
+import '../../feature/auth/data/user_model.dart';
 import 'constant.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,12 +36,13 @@ class AuthGate extends StatelessWidget {
             }
 
             // التحقق هل البيانات (collectionAtt) موجودة؟
+            final UserModel user = UserModel.fromJson(
+              dbSnapshot.data!.data() as Map<String, dynamic>,
+            );
             final bool hasData =
                 dbSnapshot.data != null &&
                 dbSnapshot.data!.exists &&
-                (dbSnapshot.data!.data() as Map<String, dynamic>).containsKey(
-                  DataString.collectionAtt,
-                );
+                user.collectionData != null;
 
             if (hasData) {
               return const HomeView(); // البيانات كاملة -> الهوم

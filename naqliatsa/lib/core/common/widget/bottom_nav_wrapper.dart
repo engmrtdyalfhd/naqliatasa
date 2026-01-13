@@ -9,7 +9,7 @@ class BottomNavWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      // color: context.theme.scaffoldBackgroundColor,
+      color: context.theme.scaffoldBackgroundColor,
       borderRadius: BorderRadius.circular(50),
       child: Padding(
         padding:
