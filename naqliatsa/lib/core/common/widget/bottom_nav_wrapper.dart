@@ -18,7 +18,7 @@ class BottomNavWrapper extends StatelessWidget {
               _padd(context),
               3,
               _padd(context),
-              context.query.padding.bottom + 3,
+              context.query.padding.bottom + 16,
             ),
         child: child,
       ),

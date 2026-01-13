@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:naqliatsa/core/helper/extension.dart';
-import '../../../../core/common/widget/custom_bot_navbar.dart';
+import '../../../../core/common/widget/bottom_nav_wrapper.dart';
 import '../../../../core/common/widget/loading_progress.dart';
 import '../../../../core/helper/constant.dart';
+import '../../../../core/helper/extension.dart';
 import '../../manager/auth_cubit.dart';
 import '../widget/otp_input.dart';
 
@@ -112,14 +112,21 @@ class _VerifyPhoneViewState extends State<VerifyPhoneView> {
           child: BlocConsumer<AuthCubit, AuthState>(
             listener: (_, state) {
               if (state is AuthSuccess) {
-                context.pushNamedAndRemoveUntil(
-                  RoutePath.authGate,
-                  (_) => false,
-                );
+                if (state.hasCollection) {
+                  context.pushNamedAndRemoveUntil(
+                    RoutePath.authGate,
+                    (_) => false,
+                  );
+                } else {
+                  context.pushNamedAndRemoveUntil(
+                    RoutePath.collection,
+                    (_) => false,
+                  );
+                }
               }
             },
             builder: (_, state) {
-              if (state is AuthLoading) const LoadingProgress();
+              if (state is AuthLoading) return const LoadingProgress();
               return Text("continue".tr());
             },
           ),

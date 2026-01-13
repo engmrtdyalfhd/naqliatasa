@@ -12,34 +12,34 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        // actions: [
-        //   Padding(
-        //     padding: const EdgeInsets.symmetric(horizontal: 16),
-        //     child: IconButton(
-        //       onPressed: () {},
-        //       style: IconButton.styleFrom(
-        //         shape: RoundedRectangleBorder(
-        //           borderRadius: BorderRadius.circular(50),
-        //           side: BorderSide(color: Colors.lightBlue.shade100),
-        //         ),
-        //       ),
-        //       icon: Icon(Iconsax.user),
-        //     ),
-        //   ),
-        // ],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: IconButton(
+              onPressed: () => context.pushNamed(RoutePath.profile),
+              style: IconButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  side: BorderSide(color: Colors.lightBlue.shade100),
+                ),
+              ),
+              icon: Icon(Iconsax.user),
+            ),
+          ),
+        ],
         title: Image.asset(ImgPath.logo, width: 64, height: 64),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            ListTile(
-              leading: const Icon(Iconsax.user),
-              title: const Text('Profile'),
-              subtitle: Text("Laboris et amet culpa dolore minim."),
-              onTap: () => context.pushNamed(RoutePath.profile),
-            ),
-            const SizedBox(height: 6),
+            // ListTile(
+            //   leading: const Icon(Iconsax.user),
+            //   title: const Text('Profile'),
+            //   subtitle: Text("Laboris et amet culpa dolore minim."),
+            //   onTap: () => context.pushNamed(RoutePath.profile),
+            // ),
+            // const SizedBox(height: 6),
             ListTile(
               leading: const Icon(Iconsax.document),
               title: const Text('History'),

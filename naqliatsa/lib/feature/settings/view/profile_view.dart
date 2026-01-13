@@ -88,13 +88,20 @@ class ProfileView extends StatelessWidget {
               const SizedBox(height: 2),
               ListTile(
                 onTap: () async {
-                  await FirebaseAuth.instance.signOut();
-                  if (context.mounted) {
-                    context.pushNamedAndRemoveUntil(
-                      RoutePath.authGate,
-                      (_) => false,
-                    );
-                  }
+                  await showConfirmationAlert(
+                    context: context,
+                    title: "Logout",
+                    content: "Are you sure you want to logout?",
+                    onConfirm: () async {
+                      await FirebaseAuth.instance.signOut();
+                      if (context.mounted) {
+                        context.pushNamedAndRemoveUntil(
+                          RoutePath.authGate,
+                          (_) => false,
+                        );
+                      }
+                    },
+                  );
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),

@@ -5,7 +5,7 @@ import '../widget/onboarding_hey.dart';
 import '../../../../core/helper/constant.dart';
 import 'package:naqliatsa/core/helper/extension.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../../../../core/common/widget/custom_bot_navbar.dart';
+import '../../../../core/common/widget/bottom_nav_wrapper.dart';
 
 class OnboardingView extends StatelessWidget {
   const OnboardingView({super.key});

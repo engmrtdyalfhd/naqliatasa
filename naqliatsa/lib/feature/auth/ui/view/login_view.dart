@@ -9,7 +9,7 @@ import '../../../../core/helper/extension.dart';
 import '../../manager/auth_cubit.dart';
 import '../widget/country_code_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../../../../core/common/widget/custom_bot_navbar.dart';
+import '../../../../core/common/widget/bottom_nav_wrapper.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});

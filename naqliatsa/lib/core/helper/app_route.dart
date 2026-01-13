@@ -1,3 +1,4 @@
+import '../../feature/collection/ui/view/collection_view.dart';
 import 'constant.dart';
 import 'auth_gate.dart';
 import 'custom_page_route.dart';
@@ -23,6 +24,8 @@ class AppRoutes {
         );
       case RoutePath.verifyPhone:
         return CustomPageRoute(child: const VerifyPhoneView());
+      case RoutePath.collection:
+        return CustomPageRoute(child: const CollectionView());
       case RoutePath.profile:
         return CustomPageRoute(child: const ProfileView());
       default:
