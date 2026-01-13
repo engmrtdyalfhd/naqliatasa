@@ -1,3 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/common/widget/loading_progress.dart';
+import '../../manager/collection_cubit.dart';
 import '../widget/indicator.dart';
 import '../widget/collect_page.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +31,7 @@ class _CollectionViewState extends State<CollectionView> {
   @override
   void initState() {
     super.initState();
+    context.read<CollectionCubit>().getCollectionData();
     _controller = PageController(initialPage: _index);
   }
 
@@ -40,27 +44,34 @@ class _CollectionViewState extends State<CollectionView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Setup your account"),
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Text("${_index + 1} / 3"),
-          ),
-        ],
-      ),
-      body: PageView(
-        controller: _controller,
-        physics: NeverScrollableScrollPhysics(),
-        onPageChanged: (val) => setState(() => _index = val),
-        children: [
-          const CollectPage(data: [], title: "Select a car type to continue"),
-          const CollectPage(
-            data: [],
-            title: "Select the expected load to continue",
-          ),
-          const CollectPage(data: [], title: "Select a car type to continue"),
-        ],
+      appBar: AppBar(title: const Text("Setup your account")),
+      body: BlocBuilder<CollectionCubit, CollectionState>(
+        builder: (_, state) {
+          if (state is CollectionSuccess) {
+            return PageView(
+              controller: _controller,
+              onPageChanged: (val) => setState(() => _index = val),
+              children: [
+                CollectPage(
+                  data: state.collectionData.carType.data,
+                  title: state.collectionData.carType.title,
+                ),
+                CollectPage(
+                  data: state.collectionData.load.data,
+                  title: state.collectionData.load.title,
+                ),
+                CollectPage(
+                  data: state.collectionData.wheight.data,
+                  title: state.collectionData.wheight.title,
+                ),
+              ],
+            );
+          } else if (state is CollectionFailure) {
+            return Center(child: Text(state.error));
+          } else {
+            return const LoadingProgress();
+          }
+        },
       ),
       bottomNavigationBar: BottomNavWrapper(
         child: Row(

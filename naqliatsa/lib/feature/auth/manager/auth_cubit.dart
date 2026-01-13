@@ -9,7 +9,7 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
-  int counter = 45;
+  int counter = 60;
   String phone = '';
   String smsCode = '';
   String _verifId = '';
@@ -20,7 +20,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> sendOTP() async {
     if (state is AuthLoading) return;
     emit(AuthLoading());
-    counter = 45; // ! Reset counter
+    counter = 60; // ! Reset counter
     try {
       await _auth.verifyPhoneNumber(
         phoneNumber: phone,
@@ -60,35 +60,36 @@ class AuthCubit extends Cubit<AuthState> {
     await saveUser(); // ! Save user to firestore
   }
 
-  Future<void> resendOTP() async {
-    if (state is AuthLoading) return;
-    emit(AuthLoading());
-    counter = 45; // ! Reset counter
-    try {
-      await _auth.verifyPhoneNumber(
-        phoneNumber: phone,
-        timeout: Duration(seconds: counter),
-        codeSent: (String verificationId, int? _) async {
-          await _codeSent(verificationId);
-        },
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await _verificationCompleted(credential);
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          if (e.code == 'invalid-phone-number') {
-            emit(AuthFailure("The provided phone number is not valid."));
-          } else if (e.code == 'too-many-requests') {
-            emit(AuthFailure("Too many requests. please try again later."));
-          } else {
-            emit(AuthFailure("Something went wrong."));
-          }
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {},
-      );
-    } catch (e) {
-      emit(AuthFailure("Unexpected error. Try again later."));
-    }
-  }
+  // Future<void> resendOTP() async {
+  //   if (state is AuthLoading) return;
+  //   emit(AuthLoading());
+  //   smsCode = ''; // ! Reset smsCode
+  //   counter = 60; // ! Reset counter
+  //   try {
+  //     await _auth.verifyPhoneNumber(
+  //       phoneNumber: phone,
+  //       timeout: Duration(seconds: counter),
+  //       codeSent: (String verificationId, int? _) async {
+  //         await _codeSent(verificationId);
+  //       },
+  //       verificationCompleted: (PhoneAuthCredential credential) async {
+  //         await _verificationCompleted(credential);
+  //       },
+  //       verificationFailed: (FirebaseAuthException e) {
+  //         if (e.code == 'invalid-phone-number') {
+  //           emit(AuthFailure("The provided phone number is not valid."));
+  //         } else if (e.code == 'too-many-requests') {
+  //           emit(AuthFailure("Too many requests. please try again later."));
+  //         } else {
+  //           emit(AuthFailure("Something went wrong."));
+  //         }
+  //       },
+  //       codeAutoRetrievalTimeout: (String verificationId) {},
+  //     );
+  //   } catch (e) {
+  //     emit(AuthFailure("Unexpected error. Try again later."));
+  //   }
+  // }
 
   Future<void> verifyPhone() async {
     if (state is AuthLoading || smsCode.isEmpty) return;

@@ -91,9 +91,7 @@ class _VerifyPhoneViewState extends State<VerifyPhoneView> {
                 TextButton(
                   onPressed: _canResend
                       ? () async {
-                          // 1. إعادة إرسال الكود عبر الـ Cubit
                           await context.read<AuthCubit>().sendOTP();
-                          // 2. إعادة تشغيل العداد
                           startTimer();
                         }
                       : null,
