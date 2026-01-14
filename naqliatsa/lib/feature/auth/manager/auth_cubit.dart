@@ -123,7 +123,7 @@ class AuthCubit extends Cubit<AuthState> {
       final UserModel user = UserModel(
         phone: _auth.currentUser!.phoneNumber!,
         lastLogin: DateTime.now(),
-        collectionData: null,
+        truck: null,
       );
       await _firestore
           .collection(FirebaseStr.driversCollection)
@@ -143,7 +143,7 @@ class AuthCubit extends Cubit<AuthState> {
       // check if user exists and has document
       if (doc.exists || doc.data() == null) return false;
       final user = UserModel.fromJson(doc.data() as Map<String, dynamic>);
-      return user.collectionData == null;
+      return user.truck == null;
     } catch (e) {
       emit(AuthFailure("Oops! Couldn't get the data."));
       return false;

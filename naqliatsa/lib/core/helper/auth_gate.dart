@@ -10,7 +10,7 @@ import '../../feature/home/ui/view/home_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../feature/auth/ui/view/onboarding_view.dart';
 import '../../feature/collection/ui/view/collection_view.dart';
-import 'service_locator.dart';
+import '../service/service_locator.dart';
 
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
@@ -51,7 +51,7 @@ class AuthGate extends StatelessWidget {
             final bool hasData =
                 dbSnapshot.data != null &&
                 dbSnapshot.data!.exists &&
-                user.collectionData != null;
+                user.truck != null;
 
             if (hasData) {
               return const HomeView(); // البيانات كاملة -> الهوم

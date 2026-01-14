@@ -34,4 +34,13 @@ class CollectionCubit extends Cubit<CollectionState> {
         return collection.en;
     }
   }
+
+  // Future<void> updateUserTruck() async {
+  //   emit(CollectionLoading());
+  //   final result = await _repo.updateTruck(state.truck!);
+  //   result.fold(
+  //     (failure) => emit(CollectionFailure(failure.ex)),
+  //     (data) => emit(CollectionSuccess(state.collection!)),
+  //   );
+  // }
 }

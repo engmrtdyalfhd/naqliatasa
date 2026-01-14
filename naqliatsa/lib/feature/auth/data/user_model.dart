@@ -1,28 +1,28 @@
+import '../../collection/data/model/truck_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../collection/data/model/collection_model.dart';
 
 final class UserModel {
   final String phone;
   final DateTime lastLogin;
-  final CollectionModel? collectionData;
+  final TruckModel? truck;
 
   const UserModel({
     required this.phone,
     required this.lastLogin,
-    required this.collectionData,
+    required this.truck,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
     phone: json['phone'],
     lastLogin: (json['last_login'] as Timestamp).toDate(),
-    collectionData: json['collection_data'] == null
+    truck: json['truck'] == null
         ? null
-        : CollectionModel.fromJson(json['collection_data']),
+        : TruckModel.fromJson(json['truck']),
   );
 
   Map<String, dynamic> toJson() => {
     'phone': phone,
     'last_login': Timestamp.fromDate(lastLogin),
-    'collection_data': collectionData?.toJson(),
+    'truck': truck?.toJson(),
   };
 }

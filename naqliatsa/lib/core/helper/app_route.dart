@@ -10,7 +10,7 @@ import '../../feature/auth/ui/view/login_view.dart';
 import '../../feature/auth/manager/auth_cubit.dart';
 import '../../feature/settings/view/profile_view.dart';
 import '../../feature/auth/ui/view/verify_phone_view.dart';
-import 'service_locator.dart';
+import '../service/service_locator.dart';
 
 // ! _____ App Routes Here (OnGenerate Approach) _____ ! //
 class AppRoutes {

@@ -29,9 +29,7 @@ class _CollectionViewState extends State<CollectionView> {
     return Scaffold(
       appBar: AppBar(title: const Text("Setup your account")),
       body: BlocBuilder<CollectionCubit, CollectionState>(
-        buildWhen: (previous, current) {
-          return current is CollectionFailure || current is CollectionSuccess;
-        },
+        buildWhen: (_, current) => current is CollectionSuccess,
         builder: (_, state) {
           if (state is CollectionSuccess) {
             return Stepper(

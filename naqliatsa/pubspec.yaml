@@ -48,6 +48,7 @@ dependencies:
   flutter_native_splash: ^2.4.7
   get_it: ^9.2.0
   skeletons: ^0.0.3
+  hive_flutter: ^1.1.0
 
 flutter_native_splash:
   color: "#ffffff"

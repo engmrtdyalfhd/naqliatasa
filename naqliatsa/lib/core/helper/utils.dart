@@ -1,8 +1,13 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:naqliatsa/core/helper/constant.dart';
+
+import '../../feature/collection/data/model/collection_model.dart';
 import '../common/error/observer.dart';
 import 'extension.dart';
-import 'service_locator.dart';
+import '../service/service_locator.dart';
 import '../../firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,21 +33,21 @@ Future<void> initMain() async {
   );
 
   // ! ______ Save dashboard data to firestore
-  // Future<Map<String, dynamic>> loadDashboardJson() async {
-  //   final String jsonString = await rootBundle.loadString(
-  //     'assets/langs/data.json',
-  //   );
+  Future<Map<String, dynamic>> loadDashboardJson() async {
+    final String jsonString = await rootBundle.loadString(
+      'assets/langs/data.json',
+    );
 
-  //   return json.decode(jsonString) as Map<String, dynamic>;
-  // }
+    return json.decode(jsonString) as Map<String, dynamic>;
+  }
 
-  // final rawData = await loadDashboardJson();
-  // final model = CollectionModel.fromJson(rawData);
+  final rawData = await loadDashboardJson();
+  final model = CollectionModel.fromJson(rawData);
 
-  // await FirebaseFirestore.instance
-  //     .collection(FirebaseStr.dashboardCollection)
-  //     .doc(FirebaseStr.collectDataDoc)
-  //     .set(model.toJson());
+  await FirebaseFirestore.instance
+      .collection(FirebaseStr.dashboardCollection)
+      .doc(FirebaseStr.collectDataDoc)
+      .set(model.toJson());
   // ! ______ Save dashboard data to firestore
 
   FlutterNativeSplash.remove();
