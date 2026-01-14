@@ -1,4 +1,4 @@
-import '../data/collection_repo.dart';
+import '../data/repo/collection_repo.dart';
 import '../data/model/collection_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,29 +1,32 @@
-import 'car_collection_model.dart';
-import 'load_collection_model.dart';
-import 'weight_collection_model.dart';
+import 'truck_model.dart';
 
-final class CollectionModel {
-  final LoadCollectionModel load;
-  final WeightCollectionModel wheight;
-  final CarCollectionModel carType;
-
+class CollectionModel {
+  final List<TruckModel> en, ar, urdu;
   const CollectionModel({
-    required this.load,
-    required this.wheight,
-    required this.carType,
+    required this.en,
+    required this.ar,
+    required this.urdu,
   });
 
   factory CollectionModel.fromJson(Map<String, dynamic> json) {
     return CollectionModel(
-      load: LoadCollectionModel.fromJson(json['load']),
-      wheight: WeightCollectionModel.fromJson(json['wheight']),
-      carType: CarCollectionModel.fromJson(json['car_type']),
+      en: (json['en'] as List<dynamic>)
+          .map((e) => TruckModel.fromJson(e))
+          .toList(),
+      ar: (json['ar'] as List<dynamic>)
+          .map((e) => TruckModel.fromJson(e))
+          .toList(),
+      urdu: (json['urdu'] as List<dynamic>)
+          .map((e) => TruckModel.fromJson(e))
+          .toList(),
     );
   }
 
-  Map<String, List> toJson() => {
-    'load': load.data,
-    'wheight': wheight.data,
-    'car_type': carType.data,
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      'en': en.map((e) => e.toJson()).toList(),
+      'ar': ar.map((e) => e.toJson()).toList(),
+      'urdu': urdu.map((e) => e.toJson()).toList(),
+    };
+  }
 }

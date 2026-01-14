@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/common/widget/loading_progress.dart';
 import '../../manager/collection_cubit.dart';
-import '../widget/indicator.dart';
 import '../widget/collect_page.dart';
+import '../widget/indicator.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/common/widget/bottom_nav_wrapper.dart';
 
@@ -53,16 +53,16 @@ class _CollectionViewState extends State<CollectionView> {
               onPageChanged: (val) => setState(() => _index = val),
               children: [
                 CollectPage(
-                  data: state.collectionData.carType.data,
-                  title: state.collectionData.carType.title,
+                  data: state.collectionData.en,
+                  title: "Select a car type to continue",
                 ),
                 CollectPage(
-                  data: state.collectionData.load.data,
-                  title: state.collectionData.load.title,
+                  data: state.collectionData.en,
+                  title: "Select a carrier type to continue",
                 ),
                 CollectPage(
-                  data: state.collectionData.wheight.data,
-                  title: state.collectionData.wheight.title,
+                  data: state.collectionData.en,
+                  title: "Select a carrier feature to continue",
                 ),
               ],
             );

@@ -12,11 +12,11 @@ final class RoutePath {
   static const String profile = "/profile";
 }
 
-final class DataString {
+final class FirebaseStr {
   // Naqliat Users
   static const String usersCollection = "naqliat_users";
   static const String collectionAtt = "collection_data";
   // Dashboard
   static const String dashboardCollection = "dashboard";
-  static const String collectionDoc = "collection_data";
+  static const String collectDataDoc = "collect_data";
 }

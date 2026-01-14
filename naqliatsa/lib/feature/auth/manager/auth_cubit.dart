@@ -126,7 +126,7 @@ class AuthCubit extends Cubit<AuthState> {
         collectionData: null,
       );
       await _firestore
-          .collection(DataString.usersCollection)
+          .collection(FirebaseStr.usersCollection)
           .doc(_auth.currentUser!.uid)
           .set(user.toJson(), SetOptions(merge: true));
     } catch (e) {
@@ -137,7 +137,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<bool> get _didUserCollectData async {
     try {
       final DocumentSnapshot doc = await FirebaseFirestore.instance
-          .collection(DataString.usersCollection)
+          .collection(FirebaseStr.usersCollection)
           .doc(_auth.currentUser?.uid)
           .get();
       // check if user exists and has document

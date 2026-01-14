@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../feature/auth/data/user_model.dart';
-import '../../feature/collection/data/collection_repo.dart';
+import '../../feature/collection/data/repo/collection_repo.dart';
 import '../../feature/collection/manager/collection_cubit.dart';
 import 'constant.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class AuthGate extends StatelessWidget {
         // 3. إذا سجل دخول بالهاتف، نتحقق الآن من بياناته في Firestore
         return FutureBuilder<DocumentSnapshot>(
           future: FirebaseFirestore.instance
-              .collection(DataString.usersCollection)
+              .collection(FirebaseStr.usersCollection)
               .doc(authSnapshot.data?.uid)
               .get(),
           builder: (context, dbSnapshot) {

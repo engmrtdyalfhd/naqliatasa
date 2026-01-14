@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 
-import '../../feature/collection/data/collection_repo.dart';
+import '../../feature/collection/data/repo/collection_repo.dart';
 
 final GetIt getIt = GetIt.instance;
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../data/model/truck_model.dart';
+
 class CollectPage extends StatefulWidget {
   final String title;
-  final List data;
+  final List<TruckModel> data;
   final bool hasIcon;
 
   const CollectPage({
@@ -17,7 +19,7 @@ class CollectPage extends StatefulWidget {
 }
 
 class _CollectPageState extends State<CollectPage> {
-  String _selected = "";
+  int _selected = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +34,13 @@ class _CollectPageState extends State<CollectPage> {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (_, index) {
             return RadioMenuButton(
-              value: widget.data[index],
+              value: index,
               groupValue: _selected,
               onChanged: (val) {
                 setState(() => _selected = val!);
               },
               // trailingIcon: Icon(Iconsax.car, size: 32, color: Colors.black),
-              child: Text(widget.data[index]),
+              child: Text(widget.data[index].truckName),
             );
           },
           separatorBuilder: (_, _) => const SizedBox(height: 6),

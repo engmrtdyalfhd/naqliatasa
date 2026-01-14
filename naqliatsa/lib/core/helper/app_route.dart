@@ -1,4 +1,4 @@
-import '../../feature/collection/data/collection_repo.dart';
+import '../../feature/collection/data/repo/collection_repo.dart';
 import '../../feature/collection/manager/collection_cubit.dart';
 import '../../feature/collection/ui/view/collection_view.dart';
 import 'constant.dart';

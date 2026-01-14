@@ -1,4 +1,5 @@
 import 'extension.dart';
+import 'service_locator.dart';
 import '../../firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,8 +7,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-
-import 'service_locator.dart';
 
 Future<void> initMain() async {
   FlutterNativeSplash.preserve(
@@ -23,6 +22,25 @@ Future<void> initMain() async {
       statusBarIconBrightness: Brightness.light,
     ),
   );
+
+  // ! ______ Save collect_data data to firestore
+  // Future<Map<String, dynamic>> loadDashboardJson() async {
+  //   final String jsonString = await rootBundle.loadString(
+  //     'assets/langs/data.json',
+  //   );
+
+  //   return json.decode(jsonString) as Map<String, dynamic>;
+  // }
+
+  // final rawData = await loadDashboardJson();
+  // final model = CollectionModel.fromJson(rawData);
+
+  // await FirebaseFirestore.instance
+  //     .collection(FirebaseStr.dashboardCollection)
+  //     .doc(FirebaseStr.collectDataDoc)
+  //     .set(model.toJson());
+  // ! ______ Save collect_data data to firestore
+
   FlutterNativeSplash.remove();
 }
 
