@@ -18,6 +18,7 @@ final class CollectionRepoImpl implements CollectionRepo {
           .doc(FirebaseStr.collectDataDoc)
           .get();
 
+      // ! parse data
       final CollectionModel data = CollectionModel.fromJson(
         collection.data() as Map<String, dynamic>,
       );

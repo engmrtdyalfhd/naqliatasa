@@ -1,3 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../common/error/observer.dart';
 import 'extension.dart';
 import 'service_locator.dart';
 import '../../firebase_options.dart';
@@ -13,6 +16,7 @@ Future<void> initMain() async {
     widgetsBinding: WidgetsFlutterBinding.ensureInitialized(),
   );
   serviceLocator();
+  Bloc.observer = Observer();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
@@ -23,7 +27,7 @@ Future<void> initMain() async {
     ),
   );
 
-  // ! ______ Save collect_data data to firestore
+  // ! ______ Save dashboard data to firestore
   // Future<Map<String, dynamic>> loadDashboardJson() async {
   //   final String jsonString = await rootBundle.loadString(
   //     'assets/langs/data.json',
@@ -39,7 +43,7 @@ Future<void> initMain() async {
   //     .collection(FirebaseStr.dashboardCollection)
   //     .doc(FirebaseStr.collectDataDoc)
   //     .set(model.toJson());
-  // ! ______ Save collect_data data to firestore
+  // ! ______ Save dashboard data to firestore
 
   FlutterNativeSplash.remove();
 }

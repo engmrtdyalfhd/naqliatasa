@@ -9,8 +9,8 @@ final class CollectionInitial extends CollectionState {}
 final class CollectionLoading extends CollectionState {}
 
 final class CollectionSuccess extends CollectionState {
-  final CollectionModel collectionData;
-  const CollectionSuccess(this.collectionData);
+  final List<TruckModel> trucks;
+  const CollectionSuccess(this.trucks);
 }
 
 final class CollectionFailure extends CollectionState {

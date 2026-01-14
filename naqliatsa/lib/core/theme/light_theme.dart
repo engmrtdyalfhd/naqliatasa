@@ -61,12 +61,13 @@ ThemeData lightTheme() {
     // ! _____ Radio Button (Collection View) _____ ! //
     menuButtonTheme: MenuButtonThemeData(
       style: ButtonStyle(
+        padding: WidgetStatePropertyAll(const EdgeInsets.all(8)),
         // backgroundColor: WidgetStatePropertyAll(Colory.lightBg),
-        minimumSize: WidgetStatePropertyAll(Size.fromHeight(64)),
+        // minimumSize: WidgetStatePropertyAll(Size.fromHeight(64)),
         shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-            side: BorderSide(color: Colors.blue.shade100),
+            borderRadius: BorderRadius.circular(8),
+            // side: BorderSide(color: Colors.blue.shade100),
           ),
         ),
       ),
@@ -125,9 +126,6 @@ ThemeData lightTheme() {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
     // ! _____ Progress Indicator _____ ! //
-    progressIndicatorTheme: const ProgressIndicatorThemeData(
-      strokeWidth: 2,
-      color: Colors.white,
-    ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(),
   );
 }

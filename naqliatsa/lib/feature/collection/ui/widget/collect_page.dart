@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../data/model/truck_model.dart';
 
 class CollectPage extends StatefulWidget {
@@ -23,29 +22,22 @@ class _CollectPageState extends State<CollectPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(16),
-      children: [
-        Text(widget.title, style: TextStyle(fontSize: 16, fontWeight: .w400)),
-        const SizedBox(height: 16),
-        ListView.separated(
-          itemCount: widget.data.length,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (_, index) {
-            return RadioMenuButton(
-              value: index,
-              groupValue: _selected,
-              onChanged: (val) {
-                setState(() => _selected = val!);
-              },
-              // trailingIcon: Icon(Iconsax.car, size: 32, color: Colors.black),
-              child: Text(widget.data[index].truckName),
-            );
+    return ListView.builder(
+      itemCount: widget.data.length,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (_, index) {
+        return RadioMenuButton(
+          value: index,
+          groupValue: _selected,
+          onChanged: (val) {
+            setState(() => _selected = val!);
           },
-          separatorBuilder: (_, _) => const SizedBox(height: 6),
-        ),
-      ],
+          // trailingIcon: Icon(Iconsax.car, size: 32, color: Colors.black),
+          child: Text(widget.data[index].truckName),
+        );
+      },
+      // separatorBuilder: (_, _) => const SizedBox(height: 0.5),
     );
   }
 }

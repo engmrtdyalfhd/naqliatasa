@@ -1,10 +1,7 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/common/widget/loading_progress.dart';
-import '../../manager/collection_cubit.dart';
 import '../widget/collect_page.dart';
-import '../widget/indicator.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/common/widget/bottom_nav_wrapper.dart';
+import '../../manager/collection_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CollectionView extends StatefulWidget {
   const CollectionView({super.key});
@@ -15,29 +12,15 @@ class CollectionView extends StatefulWidget {
 
 class _CollectionViewState extends State<CollectionView> {
   int _index = 0;
-  late final PageController _controller;
-
-  Future<void> _animatePage(int index) async {
-    if (index >= 0 && index < 3) {
-      setState(() => _index = index);
-      await _controller.animateToPage(
-        index,
-        curve: Curves.easeInOut,
-        duration: const Duration(milliseconds: 300),
-      );
-    }
-  }
 
   @override
   void initState() {
     super.initState();
-    context.read<CollectionCubit>().getCollectionData();
-    _controller = PageController(initialPage: _index);
+    context.read<CollectionCubit>().getCollectionData(context);
   }
 
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
   }
 
@@ -46,69 +29,65 @@ class _CollectionViewState extends State<CollectionView> {
     return Scaffold(
       appBar: AppBar(title: const Text("Setup your account")),
       body: BlocBuilder<CollectionCubit, CollectionState>(
+        buildWhen: (previous, current) {
+          return current is CollectionFailure || current is CollectionSuccess;
+        },
         builder: (_, state) {
           if (state is CollectionSuccess) {
-            return PageView(
-              controller: _controller,
-              onPageChanged: (val) => setState(() => _index = val),
-              children: [
-                CollectPage(
-                  data: state.collectionData.en,
-                  title: "Select a car type to continue",
+            return Stepper(
+              currentStep: _index,
+              // onStepTapped: (val) => setState(() => _index = val),
+              // onStepContinue: () {
+              //   if (_index < 2) {
+              //     setState(() => _index++);
+              //   }
+              // },
+              // onStepCancel: () => _index > 0 ? setState(() => _index--) : null,
+              steps: [
+                Step(
+                  isActive: _index >= 0,
+                  title: const Text("Truck"),
+                  subtitle: const Text("Select a car type to continue"),
+                  content: CollectPage(title: '', data: state.trucks),
                 ),
-                CollectPage(
-                  data: state.collectionData.en,
-                  title: "Select a carrier type to continue",
+                Step(
+                  isActive: _index >= 1,
+                  title: const Text("Carrier"),
+                  subtitle: const Text("Select a carrier type to continue"),
+                  content: CollectPage(title: '', data: state.trucks),
                 ),
-                CollectPage(
-                  data: state.collectionData.en,
-                  title: "Select a carrier feature to continue",
+                Step(
+                  isActive: _index >= 2,
+                  title: const Text("Feature"),
+                  subtitle: const Text("Select a carrier feature to continue"),
+                  content: CollectPage(title: '', data: state.trucks),
                 ),
               ],
             );
+            // return PageView(
+            //   controller: _controller,
+            //   onPageChanged: (val) => setState(() => _index = val),
+            //   children: [
+            //     CollectPage(
+            //       data: state.trucks,
+            //       title: "Select a car type to continue",
+            //     ),
+            //     CollectPage(
+            //       data: state.trucks,
+            //       title: "Select a carrier type to continue",
+            //     ),
+            //     CollectPage(
+            //       data: state.trucks,
+            //       title: "Select a carrier feature to continue",
+            //     ),
+            //   ],
+            // );
           } else if (state is CollectionFailure) {
             return Center(child: Text(state.error));
           } else {
-            return const LoadingProgress();
+            return const Center(child: CircularProgressIndicator.adaptive());
           }
         },
-      ),
-      bottomNavigationBar: BottomNavWrapper(
-        child: Row(
-          spacing: 6,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: TextButton(
-                onPressed: _index > 0
-                    ? () {
-                        _animatePage(_index - 1);
-                      }
-                    : null,
-                child: const Text("Prev"),
-              ),
-            ),
-            Flexible(
-              child: Wrap(
-                children: List.generate(
-                  3,
-                  (i) => GestureDetector(
-                    onTap: () => _animatePage(i),
-                    child: Indicator(_index != i),
-                  ),
-                ),
-              ),
-            ),
-            Flexible(
-              child: TextButton(
-                onPressed: () {
-                  if (_index < 3 - 1) _animatePage(_index + 1);
-                },
-                child: Text(_index < 3 - 1 ? "Next" : "Done"),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

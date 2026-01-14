@@ -116,10 +116,10 @@ class _VerifyPhoneViewState extends State<VerifyPhoneView> {
                     (_) => false,
                   );
                 } else {
-                  context.pushNamedAndRemoveUntil(
-                    RoutePath.collection,
-                    (_) => false,
-                  );
+                  // context.pushNamedAndRemoveUntil(
+                  //   RoutePath.collection,
+                  //   (_) => false,
+                  // );
                 }
               }
             },

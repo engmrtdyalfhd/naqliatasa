@@ -31,7 +31,7 @@ class AuthGate extends StatelessWidget {
         // 3. إذا سجل دخول بالهاتف، نتحقق الآن من بياناته في Firestore
         return FutureBuilder<DocumentSnapshot>(
           future: FirebaseFirestore.instance
-              .collection(FirebaseStr.usersCollection)
+              .collection(FirebaseStr.driversCollection)
               .doc(authSnapshot.data?.uid)
               .get(),
           builder: (context, dbSnapshot) {

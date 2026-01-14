@@ -14,8 +14,8 @@ final class RoutePath {
 
 final class FirebaseStr {
   // Naqliat Users
-  static const String usersCollection = "naqliat_users";
-  static const String collectionAtt = "collection_data";
+  static const String driversCollection = "drivers";
+  static const String driverTruck = "driver_truck";
   // Dashboard
   static const String dashboardCollection = "dashboard";
   static const String collectDataDoc = "collect_data";
