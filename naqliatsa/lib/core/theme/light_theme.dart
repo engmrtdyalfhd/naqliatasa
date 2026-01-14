@@ -64,6 +64,9 @@ ThemeData lightTheme() {
         padding: WidgetStatePropertyAll(const EdgeInsets.all(8)),
         // backgroundColor: WidgetStatePropertyAll(Colory.lightBg),
         // minimumSize: WidgetStatePropertyAll(Size.fromHeight(64)),
+        textStyle: WidgetStatePropertyAll(
+          TextStyle(fontSize: 14, fontWeight: .normal),
+        ),
         shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),

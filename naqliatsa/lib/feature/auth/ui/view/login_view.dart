@@ -135,6 +135,11 @@ class _LoginViewState extends State<LoginView> {
                 );
               } else if (state is AuthFailure) {
                 context.simpleDialog(msg: state.error, lottie: ImgPath.error);
+              } else if (state is AuthSuccess) {
+                context.pushNamedAndRemoveUntil(
+                  RoutePath.authGate,
+                  (_) => false,
+                );
               }
             },
             builder: (_, state) {

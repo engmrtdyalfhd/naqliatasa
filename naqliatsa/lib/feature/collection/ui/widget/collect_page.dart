@@ -23,8 +23,8 @@ class _CollectPageState extends State<CollectPage> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: widget.data.length,
       shrinkWrap: true,
+      itemCount: widget.data.length,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (_, index) {
         return RadioMenuButton(

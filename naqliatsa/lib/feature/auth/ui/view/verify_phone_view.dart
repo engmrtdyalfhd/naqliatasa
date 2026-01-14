@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/common/widget/bottom_nav_wrapper.dart';
 import '../../../../core/common/widget/loading_progress.dart';
-import '../../../../core/helper/constant.dart';
-import '../../../../core/helper/extension.dart';
 import '../../manager/auth_cubit.dart';
 import '../widget/otp_input.dart';
 
@@ -108,21 +106,7 @@ class _VerifyPhoneViewState extends State<VerifyPhoneView> {
             context.read<AuthCubit>().verifyPhone();
           },
           child: BlocConsumer<AuthCubit, AuthState>(
-            listener: (_, state) {
-              if (state is AuthSuccess) {
-                if (state.hasCollection) {
-                  context.pushNamedAndRemoveUntil(
-                    RoutePath.authGate,
-                    (_) => false,
-                  );
-                } else {
-                  // context.pushNamedAndRemoveUntil(
-                  //   RoutePath.collection,
-                  //   (_) => false,
-                  // );
-                }
-              }
-            },
+            listener: (_, state) {},
             builder: (_, state) {
               if (state is AuthLoading) return const LoadingProgress();
               return Text("continue".tr());
