@@ -3,19 +3,19 @@ import 'carrier_model.dart';
 class TruckModel {
   final int id;
   final String truckName;
-  final List<CarrierModel> truckData;
+  final List<CarrierModel> carriers;
 
   const TruckModel({
     required this.id,
     required this.truckName,
-    required this.truckData,
+    required this.carriers,
   });
 
   factory TruckModel.fromJson(Map<String, dynamic> json) {
     return TruckModel(
       id: json["truck_id"] as int,
       truckName: json['truck_name'] as String,
-      truckData: (json['truck_data'] as List<dynamic>)
+      carriers: (json['truck_data'] as List<dynamic>)
           .map((e) => CarrierModel.fromJson(e))
           .toList(),
     );
@@ -25,7 +25,7 @@ class TruckModel {
     return {
       'truck_id': id,
       'truck_name': truckName,
-      'truck_data': truckData.map((e) => e.toJson()).toList(),
+      'truck_data': carriers.map((e) => e.toJson()).toList(),
     };
   }
 }

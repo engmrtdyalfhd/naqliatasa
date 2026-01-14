@@ -1,4 +1,9 @@
-import '../widget/collect_page.dart';
+import 'package:naqliatsa/core/helper/extension.dart';
+
+import '../../../../core/helper/constant.dart';
+import '../widget/carrier_feature_section.dart';
+import '../widget/carrier_section.dart';
+import '../widget/truck_section.dart';
 import 'package:flutter/material.dart';
 import '../../manager/collection_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,37 +33,41 @@ class _CollectionViewState extends State<CollectionView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Setup your account")),
-      body: BlocBuilder<CollectionCubit, CollectionState>(
-        buildWhen: (_, current) => current is CollectionSuccess,
+      body: BlocConsumer<CollectionCubit, CollectionState>(
+        buildWhen: (_, current) => current is CollectionFetched,
+        listener: (_, state) {
+          if (state is CollectionFailure) {
+            context.simpleDialog(msg: state.error, lottie: ImgPath.error);
+          }
+        },
         builder: (_, state) {
-          if (state is CollectionSuccess) {
+          if (state is CollectionFetched) {
             return Stepper(
               currentStep: _index,
-              // onStepTapped: (val) => setState(() => _index = val),
-              // onStepContinue: () {
-              //   if (_index < 2) {
-              //     setState(() => _index++);
-              //   }
-              // },
-              // onStepCancel: () => _index > 0 ? setState(() => _index--) : null,
+              onStepContinue: () {
+                if (_index < 2) {
+                  setState(() => _index++);
+                } else {}
+              },
+              onStepCancel: _index > 0 ? () => setState(() => _index--) : null,
               steps: [
                 Step(
                   isActive: _index >= 0,
                   title: const Text("Truck"),
                   subtitle: const Text("Select a car type to continue"),
-                  content: CollectPage(title: '', data: state.trucks),
+                  content: TruckSection(trucks: state.trucks),
                 ),
                 Step(
                   isActive: _index >= 1,
                   title: const Text("Carrier"),
                   subtitle: const Text("Select a carrier type to continue"),
-                  content: CollectPage(title: '', data: state.trucks),
+                  content: const CarrierSection(),
                 ),
                 Step(
                   isActive: _index >= 2,
                   title: const Text("Feature"),
                   subtitle: const Text("Select a carrier feature to continue"),
-                  content: CollectPage(title: '', data: state.trucks),
+                  content: const CarrierFeatureSection(),
                 ),
               ],
             );

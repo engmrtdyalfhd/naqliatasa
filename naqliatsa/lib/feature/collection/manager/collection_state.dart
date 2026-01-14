@@ -8,9 +8,21 @@ final class CollectionInitial extends CollectionState {}
 
 final class CollectionLoading extends CollectionState {}
 
-final class CollectionSuccess extends CollectionState {
+final class CollectionFetched extends CollectionState {
   final List<TruckModel> trucks;
-  const CollectionSuccess(this.trucks);
+  const CollectionFetched(this.trucks);
+}
+
+final class CollectionUpdated extends CollectionState {}
+
+final class TruckSelected extends CollectionState {
+  final List<CarrierModel> carrier;
+  const TruckSelected(this.carrier);
+}
+
+final class CarrierSelected extends CollectionState {
+  final List<CarrierFeatureModel> features;
+  const CarrierSelected(this.features);
 }
 
 final class CollectionFailure extends CollectionState {

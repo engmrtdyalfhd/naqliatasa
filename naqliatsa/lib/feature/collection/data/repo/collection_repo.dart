@@ -1,14 +1,15 @@
 import 'package:dartz/dartz.dart';
-import '../model/truck_model.dart';
 import '../model/collection_model.dart';
 import '../../../../core/helper/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../../../core/common/error/failure.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../model/user_truck_model.dart';
+
 abstract class CollectionRepo {
   Future<Either<Failure, CollectionModel>> getCollectionData();
-  Future<Either<Failure, void>> updateTruck(TruckModel truck);
+  Future<Either<Failure, void>> updateTruck(UserTruckModel truck);
 }
 
 final class CollectionRepoImpl implements CollectionRepo {
@@ -33,7 +34,7 @@ final class CollectionRepoImpl implements CollectionRepo {
   }
 
   @override
-  Future<Either<Failure, void>> updateTruck(TruckModel truck) async {
+  Future<Either<Failure, void>> updateTruck(UserTruckModel truck) async {
     try {
       final uid = FirebaseAuth.instance.currentUser?.uid;
 
