@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../core/helper/constant.dart';
+import '../data/login_model.dart';
 import '../data/user_model.dart';
 
 part 'auth_state.dart';
@@ -26,7 +27,7 @@ class AuthCubit extends Cubit<AuthState> {
         phoneNumber: phone,
         timeout: Duration(seconds: counter),
         codeSent: (String verificationId, int? _) async {
-          await _codeSent(verificationId);
+          _verifId = verificationId;
           emit(CodeSentState());
         },
         verificationCompleted: (PhoneAuthCredential credential) async {
@@ -54,42 +55,6 @@ class AuthCubit extends Cubit<AuthState> {
     _isUserHasCollection = await _didUserCollectData;
     emit(AuthSuccess(_isUserHasCollection));
   }
-
-  Future<void> _codeSent(String verificationId) async {
-    _verifId = verificationId;
-    await saveUser(); // ! Save user to firestore
-  }
-
-  // Future<void> resendOTP() async {
-  //   if (state is AuthLoading) return;
-  //   emit(AuthLoading());
-  //   smsCode = ''; // ! Reset smsCode
-  //   counter = 60; // ! Reset counter
-  //   try {
-  //     await _auth.verifyPhoneNumber(
-  //       phoneNumber: phone,
-  //       timeout: Duration(seconds: counter),
-  //       codeSent: (String verificationId, int? _) async {
-  //         await _codeSent(verificationId);
-  //       },
-  //       verificationCompleted: (PhoneAuthCredential credential) async {
-  //         await _verificationCompleted(credential);
-  //       },
-  //       verificationFailed: (FirebaseAuthException e) {
-  //         if (e.code == 'invalid-phone-number') {
-  //           emit(AuthFailure("The provided phone number is not valid."));
-  //         } else if (e.code == 'too-many-requests') {
-  //           emit(AuthFailure("Too many requests. please try again later."));
-  //         } else {
-  //           emit(AuthFailure("Something went wrong."));
-  //         }
-  //       },
-  //       codeAutoRetrievalTimeout: (String verificationId) {},
-  //     );
-  //   } catch (e) {
-  //     emit(AuthFailure("Unexpected error. Try again later."));
-  //   }
-  // }
 
   Future<void> verifyPhone() async {
     if (state is AuthLoading || smsCode.isEmpty) return;
@@ -120,10 +85,9 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> saveUser() async {
     try {
       if (_auth.currentUser == null) return;
-      final UserModel user = UserModel(
+      final LoginModel user = LoginModel(
         phone: _auth.currentUser!.phoneNumber!,
         lastLogin: DateTime.now(),
-        truck: null,
       );
       await _firestore
           .collection(FirebaseStr.driversCollection)

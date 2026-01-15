@@ -23,7 +23,7 @@ class HomeView extends StatelessWidget {
                   side: BorderSide(color: Colors.blue.shade100),
                 ),
               ),
-              icon: Icon(Iconsax.user),
+              icon: Icon(Iconsax.setting_2),
             ),
           ),
         ],
@@ -32,14 +32,12 @@ class HomeView extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: .stretch,
           children: [
-            // ListTile(
-            //   leading: const Icon(Iconsax.user),
-            //   title: const Text('Profile'),
-            //   subtitle: Text("Laboris et amet culpa dolore minim."),
-            //   onTap: () => context.pushNamed(RoutePath.profile),
-            // ),
-            // const SizedBox(height: 6),
+            Text("My Fleet", style: TextStyle(fontSize: 16, fontWeight: .w500)),
+            const SizedBox(height: 6),
+
+            const SizedBox(height: 6),
             ListTile(
               leading: const Icon(Iconsax.document),
               title: const Text('History'),

@@ -15,15 +15,11 @@ final class CollectionFetched extends CollectionState {
 
 final class CollectionUpdated extends CollectionState {}
 
-final class TruckSelected extends CollectionState {
-  final List<CarrierModel> carrier;
-  const TruckSelected(this.carrier);
-}
+final class TruckSelected extends CollectionState {}
 
-final class CarrierSelected extends CollectionState {
-  final List<CarrierFeatureModel> features;
-  const CarrierSelected(this.features);
-}
+final class CarrierSelected extends CollectionState {}
+
+final class FeatureSelected extends CollectionState {}
 
 final class CollectionFailure extends CollectionState {
   final String error;

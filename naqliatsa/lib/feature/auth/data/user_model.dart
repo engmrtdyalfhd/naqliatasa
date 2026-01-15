@@ -1,25 +1,26 @@
-import '../../collection/data/model/truck_model.dart';
+import 'login_model.dart';
+import 'user_truck_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-final class UserModel {
-  final String phone;
-  final DateTime lastLogin;
-  final TruckModel? truck;
+final class UserModel extends LoginModel {
+  final UserTruckModel? truck;
 
   const UserModel({
-    required this.phone,
-    required this.lastLogin,
+    required super.phone,
+    required super.lastLogin,
     required this.truck,
   });
 
+  @override
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
     phone: json['phone'],
     lastLogin: (json['last_login'] as Timestamp).toDate(),
     truck: json['truck'] == null
         ? null
-        : TruckModel.fromJson(json['truck']),
+        : UserTruckModel.fromJson(json['truck']),
   );
 
+  @override
   Map<String, dynamic> toJson() => {
     'phone': phone,
     'last_login': Timestamp.fromDate(lastLogin),

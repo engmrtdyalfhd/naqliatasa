@@ -3,37 +3,34 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/model/truck_model.dart';
 import '../../manager/collection_cubit.dart';
 
-class TruckSection extends StatefulWidget {
+class TruckSection extends StatelessWidget {
   final List<TruckModel> trucks;
 
   const TruckSection({super.key, required this.trucks});
 
   @override
-  State<TruckSection> createState() => _TruckSectionState();
-}
-
-class _TruckSectionState extends State<TruckSection> {
-  int _selected = -1;
-
-  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: widget.trucks.length,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (_, index) {
-        return RadioMenuButton(
-          value: index,
-          groupValue: _selected,
-          onChanged: (val) => _onChanged(context, index),
-          child: Text(widget.trucks[index].truckName),
+    return BlocBuilder<CollectionCubit, CollectionState>(
+      buildWhen: (_, current) => current is TruckSelected,
+      builder: (context, state) {
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: trucks.length,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (_, index) {
+            return RadioMenuButton(
+              value: trucks[index].id,
+              groupValue: context.read<CollectionCubit>().userSelection.truckId,
+              onChanged: (val) => _onChanged(context, index),
+              child: Text(trucks[index].truckName),
+            );
+          },
         );
       },
     );
   }
 
   void _onChanged(BuildContext context, int index) {
-    context.read<CollectionCubit>().selectTruck(widget.trucks[index]);
-    setState(() => _selected = index);
+    context.read<CollectionCubit>().selectTruck(trucks[index]);
   }
 }

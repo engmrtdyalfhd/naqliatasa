@@ -1,6 +1,5 @@
-import 'package:naqliatsa/core/helper/extension.dart';
-
 import '../../../../core/helper/constant.dart';
+import '../../../../core/helper/extension.dart';
 import '../widget/carrier_feature_section.dart';
 import '../widget/carrier_section.dart';
 import '../widget/truck_section.dart';
@@ -38,18 +37,23 @@ class _CollectionViewState extends State<CollectionView> {
         listener: (_, state) {
           if (state is CollectionFailure) {
             context.simpleDialog(msg: state.error, lottie: ImgPath.error);
+          } else if (state is CollectionUpdated) {
+            context.pushNamedAndRemoveUntil(RoutePath.authGate, (_) => false);
+          } else if (state is CollectionLoading) {
+            context.simpleDialog(msg: "Loading...", lottie: ImgPath.loading);
           }
         },
         builder: (_, state) {
           if (state is CollectionFetched) {
             return Stepper(
               currentStep: _index,
-              onStepContinue: () {
-                if (_index < 2) {
-                  setState(() => _index++);
-                } else {}
-              },
-              onStepCancel: _index > 0 ? () => setState(() => _index--) : null,
+              onStepContinue: () async => await _onStepContinue(context),
+              onStepCancel: _index > 0
+                  ? () {
+                      context.read<CollectionCubit>().resetStep(_index);
+                      setState(() => _index--);
+                    }
+                  : null,
               steps: [
                 Step(
                   isActive: _index >= 0,
@@ -71,24 +75,6 @@ class _CollectionViewState extends State<CollectionView> {
                 ),
               ],
             );
-            // return PageView(
-            //   controller: _controller,
-            //   onPageChanged: (val) => setState(() => _index = val),
-            //   children: [
-            //     CollectPage(
-            //       data: state.trucks,
-            //       title: "Select a car type to continue",
-            //     ),
-            //     CollectPage(
-            //       data: state.trucks,
-            //       title: "Select a carrier type to continue",
-            //     ),
-            //     CollectPage(
-            //       data: state.trucks,
-            //       title: "Select a carrier feature to continue",
-            //     ),
-            //   ],
-            // );
           } else if (state is CollectionFailure) {
             return Center(child: Text(state.error));
           } else {
@@ -97,5 +83,18 @@ class _CollectionViewState extends State<CollectionView> {
         },
       ),
     );
+  }
+
+  Future<void> _onStepContinue(BuildContext context) async {
+    final cubit = context.read<CollectionCubit>();
+    if (cubit.isStepValid(_index)) {
+      if (_index < 2) {
+        setState(() => _index++);
+      } else {
+        await cubit.updateUserTruck();
+      }
+    } else {
+      context.showMsg("Please select an option before contine");
+    }
   }
 }

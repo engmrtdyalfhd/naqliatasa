@@ -1,5 +1,6 @@
 final class UserTruckModel {
-  int truckId, carrierId, featureId;
+  int? featureId;
+  int truckId, carrierId;
 
   UserTruckModel({
     required this.truckId,

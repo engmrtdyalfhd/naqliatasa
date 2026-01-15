@@ -112,7 +112,7 @@ ThemeData lightTheme() {
     ),
     // ! _____ FAB _____ ! //
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      elevation: 3,
+      elevation: 1.5,
       shape: StadiumBorder(),
       extendedTextStyle: TextStyle(
         inherit: false,

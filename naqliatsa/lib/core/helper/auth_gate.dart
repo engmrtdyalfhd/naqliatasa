@@ -41,7 +41,9 @@ class AuthGate extends StatelessWidget {
             }
 
             if (dbSnapshot.hasError) {
-              return Scaffold(body: Center(child: Text("خطأ في الاتصال")));
+              return Scaffold(
+                body: Center(child: Text("Oops! Auth gate error.")),
+              );
             }
 
             // التحقق هل البيانات (collectionAtt) موجودة؟
