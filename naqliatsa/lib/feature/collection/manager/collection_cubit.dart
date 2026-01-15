@@ -68,7 +68,11 @@ class CollectionCubit extends Cubit<CollectionState> {
       case 1:
         return userSelection.carrierId >= 0;
       case 2:
-        return features.isEmpty && userSelection.featureId == null;
+        if (features.isEmpty) {
+          return true;
+        } else {
+          return userSelection.featureId != null;
+        }
       default:
         return false;
     }
