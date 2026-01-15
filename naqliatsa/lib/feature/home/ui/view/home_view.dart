@@ -1,6 +1,5 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/helper/utils.dart';
 import '../../../../core/helper/constant.dart';
 import '../../../../core/helper/extension.dart';
 
@@ -10,62 +9,122 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: IconButton(
-              onPressed: () => context.pushNamed(RoutePath.profile),
-              style: IconButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                  side: BorderSide(color: Colors.blue.shade100),
+      appBar: AppBar(title: Image.asset(ImgPath.logo, width: 64, height: 64)),
+      body: ListView(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 128),
+        // crossAxisAlignment: .stretch,
+        children: [
+          const Header(title: "My Fleet"),
+          const SizedBox(height: 12),
+          ListTile(
+            onTap: () {},
+            dense: true,
+            trailing: const Icon(Iconsax.car),
+            title: const Text('Truck name'),
+            subtitle: Text("Car name here"),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            spacing: 8,
+            children: [
+              Expanded(
+                child: ListTile(
+                  onTap: () {},
+                  dense: true,
+                  title: const Text('Carrier type'),
+                  subtitle: Text("Car name here"),
                 ),
               ),
-              icon: Icon(Iconsax.setting_2),
+              Expanded(
+                child: ListTile(
+                  onTap: () {},
+                  dense: true,
+                  title: const Text('Carrier feature'),
+                  subtitle: Text("Car name here"),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 32),
+          const Header(title: "Location"),
+          const SizedBox(height: 8),
+          ListTile(
+            leading: const Icon(Iconsax.location),
+            title: const Text('Location'),
+            subtitle: Text("Laboris et amet culpa dolore minim."),
+            onTap: () {},
+          ),
+          const SizedBox(height: 32),
+          const Header(title: "Search"),
+          const SizedBox(height: 8),
+          ListTile(
+            leading: const Icon(Iconsax.search_favorite),
+            title: const Text('Search'),
+            subtitle: Text("Laboris et amet culpa dolore minim."),
+            onTap: () {},
+          ),
+          const SizedBox(height: 32),
+          Header(title: "History", onSeeAll: () {}),
+          // const SizedBox(height: 8),
+          SizedBox(
+            height: context.query.size.height * .2,
+            child: ListView.separated(
+              itemCount: 6,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (_, index) {
+                return Card(
+                  elevation: 0,
+                  margin: EdgeInsets.zero,
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: context.query.size.height * .1,
+                      ),
+                      child: Text("Item $index"),
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (_, index) => const SizedBox(width: 8),
             ),
           ),
         ],
-        title: Image.asset(ImgPath.logo, width: 64, height: 64),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: .stretch,
-          children: [
-            Text("My Fleet", style: TextStyle(fontSize: 16, fontWeight: .w500)),
-            const SizedBox(height: 6),
-
-            const SizedBox(height: 6),
-            ListTile(
-              leading: const Icon(Iconsax.document),
-              title: const Text('History'),
-              subtitle: Text("Laboris et amet culpa dolore minim."),
-              onTap: () {},
-            ),
-            const SizedBox(height: 6),
-            ListTile(
-              leading: const Icon(Iconsax.location),
-              title: const Text('Location'),
-              subtitle: Text("Laboris et amet culpa dolore minim."),
-              onTap: () {},
-            ),
-            const SizedBox(height: 6),
-            ListTile(
-              leading: const Icon(Iconsax.search_favorite),
-              title: const Text('Search'),
-              subtitle: Text("Laboris et amet culpa dolore minim."),
-              onTap: () {},
-            ),
-          ],
-        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async => await whatsapp(context),
-        label: const Text("Support"),
-        icon: const Icon(Iconsax.headphone),
+        onPressed: () async => context.pushNamed(RoutePath.profile),
+        label: const Text("Settings"),
+        icon: const Icon(Iconsax.setting_2),
       ),
+    );
+  }
+}
+
+class Header extends StatelessWidget {
+  final String title;
+  final void Function()? onSeeAll;
+  const Header({super.key, required this.title, this.onSeeAll});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      spacing: 12,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.blue.shade100,
+            borderRadius: BorderRadius.circular(50),
+          ),
+        ),
+        Text(title, style: TextStyle(fontSize: 16, fontWeight: .w500)),
+        if (onSeeAll != null) ...[
+          const Spacer(),
+          TextButton(
+            onPressed: () {},
+            child: Text("See all", style: TextStyle(fontSize: 11)),
+          ),
+        ],
+      ],
     );
   }
 }

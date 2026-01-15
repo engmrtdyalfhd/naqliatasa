@@ -12,6 +12,7 @@ ThemeData lightTheme() {
     ),
     appBarTheme: const AppBarTheme(
       titleSpacing: 16,
+      scrolledUnderElevation: 0,
       backgroundColor: Colors.white,
       titleTextStyle: TextStyle(
         fontSize: 20,
